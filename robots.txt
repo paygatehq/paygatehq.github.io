@@ -1,0 +1,51 @@
+# ═══ AI CRAWLERS ARE ALLOWED, DELIBERATELY ═══
+#
+# The reflex is to block them. That reflex is for publishers whose product IS the text, who
+# lose a pageview every time a model answers instead of linking. This is a marketing site:
+# the product is the payment gateway, and a merchant asking an assistant "what can I use to
+# accept USDT payments" is exactly the customer we want it to have read this.
+#
+# Blocking GPTBot here would not protect anything. It would only guarantee that when the
+# question is asked, the answer is somebody else.
+#
+# GENERATED from src/content/seo-files.ts at build time — the Sitemap line below names a
+# domain, and this file used to be the one place a domain change could not reach.
+
+User-agent: *
+Allow: /
+
+# Answer engines, named explicitly so the intent survives someone tightening the rule above.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://paygatehq.com/sitemap.xml

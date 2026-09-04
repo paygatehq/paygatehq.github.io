@@ -1,0 +1,17 @@
+# Netlify and Cloudflare Pages. Both already resolve an extensionless path to the matching
+# directory's index.html; these make it explicit so the behaviour does not depend on a host
+# default that could change.
+#
+# THE 404 NEEDS NO RULE EITHER. Both hosts serve /404.html for a path they cannot resolve,
+# with a 404 status, as long as the file exists — which is why it is a rollup input and a
+# prerender target rather than a route. See vite.config.ts and src/pages/NotFound.tsx.
+#
+# THERE IS DELIBERATELY NO SPA FALLBACK HERE. A `/* /index.html 200` rule would answer every
+# mistyped URL — and each of these routes on any host that did not resolve it — with the
+# LANDING PAGE and a success status: the wrong document, served successfully, which is the
+# failure nobody reports.
+/pricing   /pricing/index.html   200
+/faq       /faq/index.html       200
+/vs-cards  /vs-cards/index.html  200
+/terms     /terms/index.html     200
+/privacy   /privacy/index.html   200

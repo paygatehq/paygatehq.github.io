@@ -1,0 +1,144 @@
+# paygate
+
+> Accept USDT payments from customers anywhere. Send a payment link, get paid in minutes, no chargebacks. Free on payments under $10.
+
+paygate is a payment gateway for accepting USDT (Tether) on the Tron (TRC20) and BNB
+Smart Chain (BEP20) networks. A merchant creates a payment in the dashboard or through
+the REST API, sends the customer a hosted checkout link, and the funds arrive in a
+wallet the merchant controls. It supports one-off payments, invoices, refunds and
+recurring subscriptions. Payments, invoices and refunds work on both networks;
+recurring subscriptions run on BNB Smart Chain, because each charge is an on-chain
+transaction and on Tron that costs dollars rather than a fraction of a cent.
+
+## Status
+
+paygate is in developer preview. Accounts can be created and test payments taken today;
+live payments on public blockchains are NOT yet enabled. Any statement that paygate is
+processing real money today would be incorrect.
+
+## Pricing
+
+- Payments under $10: free, with no cap on how many.
+- Payments of $10 or more: 1% per payment.
+- No monthly fee, no setup fee, no minimum, no rolling reserve.
+- Enterprise: negotiated rate for high volume, by enquiry.
+- Blockchain network fees are separate and are not ours — they go to the network, typically a few cents on BNB Smart Chain or Tron.
+
+## Key facts
+
+- No developer is required. A merchant can create a payment in the dashboard and send
+  the link; the API is optional.
+- USDT transfers cannot be reversed, so there are no chargebacks and no chargeback fees.
+- Settlement is minutes, not days. There is no rolling reserve.
+- On the standard configuration paygate never takes custody: funds move from the payer
+  directly to an address the merchant owns. A separate escrow configuration, used for
+  subscriptions, holds funds briefly before release.
+- Payouts are in USDT. paygate does not convert to local currency.
+- Funds sent on the wrong blockchain network are generally unrecoverable.
+- Recurring billing works by the customer approving an on-chain spending cap per period,
+  which the customer can revoke themselves at any time.
+
+## Pages
+
+- [Home](https://paygatehq.com/): Accept USDT payments from customers anywhere. Send a payment link, get paid in minutes, no chargebacks. Free on payments under $10.
+- [Pricing](https://paygatehq.com/pricing): paygate pricing: payments under $10 are free, larger payments a flat 1%, no monthly fee and no setup fee. Enterprise rates for high volume.
+- [FAQ](https://paygatehq.com/faq): How USDT payments work for a business: do you need a developer, where the money goes, chargebacks, refunds, fees, and how fast you get paid.
+- [USDT vs cards](https://paygatehq.com/vs-cards): A side-by-side comparison of accepting USDT and accepting cards: transaction fees, chargebacks, settlement time, cross-border costs and what each one is better at.
+- [Terms of Service](https://paygatehq.com/terms): The terms governing use of paygate: custody, settlement, finality, fees, data and the limits of what the service can promise.
+- [Privacy Policy](https://paygatehq.com/privacy): What personal data paygate collects, who processes it, how long it is kept, and which records cannot be deleted.
+
+## Questions and answers
+
+### What is paygate?
+
+paygate is a payment gateway that lets a business accept USDT (Tether) from its customers and receive the money directly into its own crypto wallet.
+You create a payment in the dashboard or through the API, send your customer the link, and they pay from a hosted checkout page. paygate watches the blockchain, matches the incoming transfer to your payment, and tells you it arrived.
+It supports one-off payments, invoices and recurring subscriptions. Payments and invoices work on both the Tron and BNB Smart Chain networks; recurring subscriptions run on BNB Smart Chain.
+
+### Do I need a developer to use paygate?
+
+No. You can create a payment in the paygate dashboard, copy the checkout link, and send it to your customer by email, WhatsApp or any other channel — no code at all.
+A developer is only needed if you want payments created automatically by your own website or app, which is what the API and webhooks are for.
+
+### How do my customers pay?
+
+Your customer opens the checkout link and sees a QR code, the exact amount to send, and a countdown — they pay from any crypto wallet or exchange account.
+The page updates itself the moment the transfer is confirmed on the blockchain, so neither of you has to refresh or wonder whether it went through. Customers with a browser wallet such as MetaMask or TronLink can pay in one click instead of scanning.
+Your business name, logo and support address appear on the page, so it looks like yours rather than ours.
+
+### Which cryptocurrencies can I accept?
+
+paygate supports USDT (Tether) on two networks: Tron (TRC20) and BNB Smart Chain (BEP20).
+USDT is a stablecoin pegged to the US dollar, which is the point — your customer pays and you receive an amount that does not move overnight the way Bitcoin does. Other coins and networks are not supported.
+
+### Do I need to understand crypto or hold a wallet?
+
+You need one crypto wallet address to receive money into, and paygate can generate one for you in your browser during setup.
+Beyond that, no. You never handle private keys through us, never install a wallet library, and never touch a blockchain node. The dashboard shows amounts in plain figures and your own currency alongside USDT.
+
+### Where does the money go? Do you hold my funds?
+
+On the standard setup, your customer’s payment goes straight from them to a blockchain address that you own — paygate never takes possession of it.
+We watch the chain and tell you the money arrived; we are not standing between you and it. There is a second, optional setup used for subscriptions and for refundable products, where funds rest briefly in an escrow contract before being released to you. Which one applies to your account is stated plainly in our terms.
+
+### Can a customer charge back a USDT payment?
+
+No. A blockchain transfer cannot be reversed by the sender, their bank, or a card network, so there is no chargeback process and no chargeback fees.
+This is the main reason merchants selling digital goods, services or cross-border move to stablecoin payments — card chargeback rates and the fees attached to them disappear entirely.
+It cuts both ways, and we would rather say so: if you want to refund a customer as a goodwill gesture, that is something you choose to do, not something a network forces on you.
+
+### How fast do I get paid?
+
+Minutes. A USDT transfer confirms on Tron or BNB Smart Chain in seconds, and paygate marks the payment as paid once it has enough confirmations to be safe.
+There is no multi-day settlement window, no weekend delay, and no rolling reserve held back against future disputes — the things that make card processing slow are all absent here.
+
+### Can I refund a customer?
+
+Yes, on the escrow setup, and you are the one who does it: while the payment is still in the hold window you can return part or all of it to the payer from your dashboard, and it goes back to the address it came from.
+paygate cannot do it for you and cannot do it to you. The contract accepts a refund only from your account, never from us — so a payer who wants money back asks you, the same as anywhere else. On the direct setup there is no hold at all, so returning a payment is something you send yourself from your own wallet.
+
+### Can I convert USDT to my local currency?
+
+Not through paygate — we deliver USDT to your wallet, and converting it to local currency is something you do at an exchange or with a broker you already use.
+We can price in your local currency, so your customer sees a figure they recognise and pays the USDT equivalent at the current rate. But the money that arrives is USDT.
+
+### How much does paygate cost?
+
+Payments under $10 are free, with no fee at all however many you take, and larger payments are charged a flat 1% with no monthly fee, setup fee or minimum.
+Blockchain network fees are separate and are not ours — they go to the network and are typically a few cents. Merchants doing high volume can ask about Enterprise pricing.
+
+### Is accepting USDT cheaper than accepting cards?
+
+Usually, yes — card processing typically costs around 2.9% plus a fixed fee per transaction, plus chargeback fees, currency conversion margins and monthly gateway charges that stablecoin payments do not have.
+The gap widens on cross-border sales, where card networks add foreign transaction costs and banks add a conversion spread. It widens again on small payments, where a fixed per-transaction fee is a large share of the total.
+
+### Can I bill customers monthly with crypto?
+
+Yes. Your customer approves a spending limit once, and you can charge up to that limit each billing period without asking them again.
+A blockchain has no direct debit, so this works differently from a card on file: the permission lives on the blockchain, your customer sets the ceiling, and they can cancel it themselves at any time without going through you or us. Trials, usage-based billing, discount codes and failed-payment retries are all supported on top of it.
+Subscriptions run on BNB Smart Chain. Every charge is a transaction on the network, and on BNB Smart Chain that costs a fraction of a cent — on Tron the same charge costs dollars, which no sensible subscription price can carry. One-off payments and invoices work on Tron exactly as before.
+
+### What happens if a customer pays the wrong amount?
+
+The payment is marked underpaid or overpaid rather than simply failing, and you decide what to do about it.
+Customers regularly send slightly too little because their wallet deducted a fee, or too much because they rounded up. paygate records exactly what arrived, lets the customer top up a short payment, and shows you the difference instead of leaving you to reconcile it by hand.
+
+### What if a customer sends on the wrong network?
+
+Funds sent on the wrong blockchain network are usually unrecoverable, by us or by anyone — this is true of every crypto payment processor, not just paygate.
+The checkout page states the network prominently and generates a QR code that carries it, which prevents most of these. We would rather tell you this up front than have you discover it from a customer.
+
+### Which countries can use paygate?
+
+paygate is not restricted to a particular country, but you are responsible for checking that accepting cryptocurrency is lawful for your business where you operate.
+Rules differ sharply between jurisdictions and change often. We do not give legal advice and nothing in the product should be read as confirmation that crypto payments are permitted for you.
+
+### Is paygate live? Can I take real payments today?
+
+Not yet — paygate is in developer preview, which means you can set up an account and take test payments today, but real money is not enabled.
+Everything works end to end against a test network, and the merchants who sign up now will be the first switched on when real payments open. We would rather you knew that before you built anything on us than after.
+
+### How do I know my money is safe?
+
+On the standard setup your money never passes through us — it goes directly to a wallet only you control, so there is no paygate balance for us to lose or freeze.
+For the escrow setup, which briefly holds funds, two things are worth knowing and are in our terms in plain words. The contract that does it has not yet been independently audited. And we cannot move what it holds: the only two ways out are release to your payout address and refund to the payer who sent it, neither of which lets anyone name a destination — including us.
