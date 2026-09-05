@@ -1,6 +1,6 @@
 # paygate
 
-> Accept USDT payments from customers anywhere. Send a payment link, get paid in minutes, no chargebacks. A flat 2% per payment.
+> Accept USDT payments from customers anywhere. Send a payment link, settle to your own wallet, no chargebacks ever. A flat 2% per payment.
 
 paygate is a payment gateway for accepting USDT (Tether) on the Tron (TRC20) and BNB
 Smart Chain (BEP20) networks. A merchant creates a payment in the dashboard or through
@@ -12,9 +12,10 @@ transaction and on Tron that costs dollars rather than a fraction of a cent.
 
 ## Status
 
-paygate is in developer preview. Accounts can be created and test payments taken today;
-live payments on public blockchains are NOT yet enabled. Any statement that paygate is
-processing real money today would be incorrect.
+paygate takes live USDT payments on BNB Smart Chain and Tron, and test payments on a
+simulated chain that needs no wallet. It is a new processor: there is no on-call rota
+yet. The escrow contract was independently audited in September 2026; it returned nine
+findings, three rated high severity, and all nine are fixed in the deployed contract.
 
 ## Pricing
 
@@ -28,10 +29,13 @@ processing real money today would be incorrect.
 - No developer is required. A merchant can create a payment in the dashboard and send
   the link; the API is optional.
 - USDT transfers cannot be reversed, so there are no chargebacks and no chargeback fees.
-- Settlement is minutes, not days. There is no rolling reserve.
-- On the standard configuration paygate never takes custody: funds move from the payer
-  directly to an address the merchant owns. A separate escrow configuration, used for
-  subscriptions, holds funds briefly before release.
+- A payment is confirmed and irreversible within minutes. It is released to the
+  merchant's own wallet 7 days later, after the refund window closes. There is no
+  rolling reserve.
+- paygate never takes custody. A payment is swept into an escrow contract, held for the
+  refund window, then released to the address the merchant registered. The contract has
+  two exits — release to that address, refund to the payer — and NEITHER takes a
+  destination parameter, so no key can redirect a payment, including ours.
 - Payouts are in USDT. paygate does not convert to local currency.
 - Funds sent on the wrong blockchain network are generally unrecoverable.
 - Recurring billing works by the customer approving an on-chain spending cap per period,
@@ -39,7 +43,7 @@ processing real money today would be incorrect.
 
 ## Pages
 
-- [Home](https://paygatehq.com/): Accept USDT payments from customers anywhere. Send a payment link, get paid in minutes, no chargebacks. A flat 2% per payment.
+- [Home](https://paygatehq.com/): Accept USDT payments from customers anywhere. Send a payment link, settle to your own wallet, no chargebacks ever. A flat 2% per payment.
 - [Pricing](https://paygatehq.com/pricing): paygate pricing: a flat 2% per payment, the same rate at every size, no monthly fee and no setup fee. Enterprise rates for high volume.
 - [FAQ](https://paygatehq.com/faq): How USDT payments work for a business: do you need a developer, where the money goes, chargebacks, refunds, fees, and how fast you get paid.
 - [USDT vs cards](https://paygatehq.com/vs-cards): A side-by-side comparison of accepting USDT and accepting cards: transaction fees, chargebacks, settlement time, cross-border costs and what each one is better at.
@@ -77,8 +81,9 @@ Beyond that, no. You never handle private keys through us, never install a walle
 
 ### Where does the money go? Do you hold my funds?
 
-On the standard setup, your customer’s payment goes straight from them to a blockchain address that you own — paygate never takes possession of it.
-We watch the chain and tell you the money arrived; we are not standing between you and it. There is a second, optional setup used for subscriptions and for refundable products, where funds rest briefly in an escrow contract before being released to you. Which one applies to your account is stated plainly in our terms.
+Your customer pays a deposit address belonging to that one payment. The money is swept into our escrow contract, held for your 7 days refund window, and then released to the payout wallet you registered.
+It never reaches an account of ours, and that is a property of the contract rather than a policy we keep. There are exactly two ways out of it — release to your payout address, and refund to the payer who sent it — and neither takes a destination as a parameter. There is no address either function could be pointed at, by anyone, including us.
+What the hold buys you is the refund window. Money already in your wallet can only be given back by you sending it; money on the contract can be returned to your customer from your dashboard while the window is open.
 
 ### Can a customer charge back a USDT payment?
 
@@ -88,13 +93,15 @@ It cuts both ways, and we would rather say so: if you want to refund a customer 
 
 ### How fast do I get paid?
 
-Minutes. A USDT transfer confirms on Tron or BNB Smart Chain in seconds, and paygate marks the payment as paid once it has enough confirmations to be safe.
-There is no multi-day settlement window, no weekend delay, and no rolling reserve held back against future disputes — the things that make card processing slow are all absent here.
+The payment is confirmed and irreversible within minutes, and it reaches your own wallet 7 days later. Those are two different moments and the gap between them is deliberate.
+What happens in between is the refund window: your customer's money sits in the escrow contract, where you can return it to them and nobody else can move it — not us, not them, not a bank. After 7 days it is released to the wallet you registered, minus the fee.
+There is no weekend delay and no rolling reserve held back against future disputes. A card payment also takes days to arrive, and then stays reversible for months afterwards; this one is final from the moment it confirms.
 
 ### Can I refund a customer?
 
-Yes, on the escrow setup, and you are the one who does it: while the payment is still in the hold window you can return part or all of it to the payer from your dashboard, and it goes back to the address it came from.
-paygate cannot do it for you and cannot do it to you. The contract accepts a refund only from your account, never from us — so a payer who wants money back asks you, the same as anywhere else. On the direct setup there is no hold at all, so returning a payment is something you send yourself from your own wallet.
+Yes, and you are the one who does it: while the payment is still inside its 7 days hold window you can return part or all of it to the payer from your dashboard, and it goes back to the address it came from.
+paygate cannot do it for you and cannot do it to you. The contract accepts a return only from the wallet you registered, never from us — so a payer who wants money back asks you, the same as anywhere else.
+Once the window closes the money is in your own wallet and the contract has nothing left to return. After that a refund is an ordinary transfer you send yourself.
 
 ### Can I convert USDT to my local currency?
 
@@ -134,10 +141,10 @@ Rules differ sharply between jurisdictions and change often. We do not give lega
 
 ### Is paygate live? Can I take real payments today?
 
-Not yet — paygate is in developer preview, which means you can set up an account and take test payments today, but real money is not enabled.
-Everything works end to end against a test network, and the merchants who sign up now will be the first switched on when real payments open. We would rather you knew that before you built anything on us than after.
+Yes. You can open an account, take test payments while you build, and switch the same integration to live money when you are ready — the API and the checkout are identical in both modes.
+What you should know before you build on us: we are new, we settle in USDT rather than your own currency, and we do not stand between you and your customer in a dispute. All of that is on this page rather than buried, because you would find it out anyway and it is better found now.
 
 ### How do I know my money is safe?
 
-On the standard setup your money never passes through us — it goes directly to a wallet only you control, so there is no paygate balance for us to lose or freeze.
-For the escrow setup, which briefly holds funds, two things are worth knowing and are in our terms in plain words. The contract that does it has not yet been independently audited. And we cannot move what it holds: the only two ways out are release to your payout address and refund to the payer who sent it, neither of which lets anyone name a destination — including us.
+Your money never passes through an account of ours, so there is no paygate balance for us to lose or freeze. It rests in the escrow contract for the refund window and is then released to the wallet you registered.
+Two things about that contract are worth knowing and are in our terms in plain words. It was independently audited in September 2026 — nine findings, three of them high severity, all fixed. And we cannot move what it holds: the only two ways out are release to your payout address and refund to the payer who sent it, neither of which lets anyone name a destination — including us.
