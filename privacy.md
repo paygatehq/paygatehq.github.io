@@ -8,9 +8,9 @@ Legal
 
 # Privacy Policy
 
-Effective 2026-09-05 · What we collect, who else sees it, and what we cannot delete.
+Effective 2026-09-06 · What we collect, who else sees it, and what we cannot delete.
 
-Version 2026-09-05.1
+Version 2026-09-06.1
 
 ## Contents
 

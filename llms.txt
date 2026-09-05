@@ -13,9 +13,12 @@ transaction and on Tron that costs dollars rather than a fraction of a cent.
 ## Status
 
 paygate takes live USDT payments on BNB Smart Chain and Tron, and test payments on a
-simulated chain that needs no wallet. It is a new processor: there is no on-call rota
-yet. The escrow contract was independently audited in September 2026; it returned nine
-findings, three rated high severity, and all nine are fixed in the deployed contract.
+simulated chain that needs no wallet. It is a new processor and carries no uptime
+commitment. The escrow contract was independently audited in September 2026; it returned
+nine findings, three rated high severity, and all nine are fixed in the deployed
+contract. When a chain cannot be watched the checkout stops taking new payments on it,
+and money already held on the contract can be released by the merchant themselves —
+collect and releaseHold are permissionless and not pausable.
 
 ## Pricing
 

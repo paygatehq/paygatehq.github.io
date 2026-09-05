@@ -8,9 +8,9 @@ Legal
 
 # Terms of Service
 
-Effective 2026-09-05 · These terms govern use of the paygate payment gateway by a merchant.
+Effective 2026-09-06 · These terms govern use of the paygate payment gateway by a merchant.
 
-Version 2026-09-05.1
+Version 2026-09-06.1
 
 Legal review
 
@@ -29,7 +29,7 @@ The document below is what binds. This is what most people would want to know be
 -   [§7](#custody-escrow) — We never hold your money in an account of ours. A payment rests in an escrow contract for your refund window, then releases to the payout address you registered.
 -   [§9](#operator-powers) — We cannot return a payer's money, freeze funds, or send them anywhere else. Neither exit from the contract takes a destination, and this deployment holds no key that could change that.
 -   [§10](#finality) — A payment reported as paid can still reverse if the chain reorganises. If you shipped on paid, that loss is yours.
--   [§3](#preview) — Alerts reach one person at all hours with nobody to escalate to, the escrow contract was independently audited in September 2026 and all nine findings are fixed, and nothing is owed to you when a published objective is missed.
+-   [§3](#preview) — Nothing is owed to you when a published objective is missed. The escrow contract was independently audited in September 2026 and all nine findings are fixed. If a chain cannot be watched the checkout stops taking new payments on it, and money already on the contract can be released by you, from any wallet, without us.
 -   [§21](#not-screened) — We do not screen payers, wallet addresses, or where money came from — against sanctions lists or anything else. Those obligations remain yours.
 -   [§31](#acceptable-use) — You promise not to use paygate for fraud, for unlawful goods, or to launder money. If you do, we can suspend your account and refuse to verify your identity documents again.
 -   [§25](#liability) — Our liability to you is capped at the fees you paid us in the three months before the claim.
@@ -92,12 +92,12 @@ You accept these terms when you create an account or use the service, whichever 
 **This is a new payment processor, and these are the things it does not do yet.** Specifically, and without qualification:
 
 -   The escrow contract described in §7 was independently audited in September 2026. The audit found nine issues, three of them high severity, and all nine are fixed in the contract this service runs against. The audited source is identified by content hash in our repository, so the version reviewed is not a matter of trust. It is the contract every subscription settles through.
--   Alerts reach one person, at all hours, and repeat until the condition clears. There is no second person to escalate to, so an alert raised overnight is answered when they wake. Nobody is contractually obliged to be awake for it.
+-   There is no uptime commitment, so what decides your exposure is what the system does when something breaks — and that is built rather than promised. New payments **fail closed**: when a chain cannot be watched, the checkout page refuses to show an address for it rather than inviting a transfer nothing would see. Money already on the contract stays **recoverable without us**: `collect` and `releaseHold` are permissionless and not pausable, so a payment this gateway cannot settle is one you can settle yourself, from any wallet, without our key and without our permission.
 -   Backups are taken and each one is verified by restoring it and checking the ledger still balances. That is a procedure, not an undertaking about how much data a failure could cost you.
 
 The status page publishes what the service is measured against and what it is currently doing. Those are objectives, not undertakings.
 
-Every other section of these terms is read subject to this one. You should not use the service for money you cannot afford to lose, and you should not represent to your own customers that it is a production payment facility.
+Every other section of these terms is read subject to this one. Judge what the service is fit for on the facts above rather than on our confidence in it: the audit, the fail-closed behaviour and the permissionless recovery are all things you can verify yourself, on-chain and in our repository, without taking our word for any of them.
 
 ## 4. Eligibility and account information\[technical account\]
 
