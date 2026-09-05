@@ -10,7 +10,7 @@ Legal
 
 Effective 2026-09-06 · These terms govern use of the paygate payment gateway by a merchant.
 
-Version 2026-09-06.1
+Version 2026-09-06.2
 
 Legal review
 
@@ -29,7 +29,7 @@ The document below is what binds. This is what most people would want to know be
 -   [§7](#custody-escrow) — We never hold your money in an account of ours. A payment rests in an escrow contract for your refund window, then releases to the payout address you registered.
 -   [§9](#operator-powers) — We cannot return a payer's money, freeze funds, or send them anywhere else. Neither exit from the contract takes a destination, and this deployment holds no key that could change that.
 -   [§10](#finality) — A payment reported as paid can still reverse if the chain reorganises. If you shipped on paid, that loss is yours.
--   [§3](#preview) — Nothing is owed to you when a published objective is missed. The escrow contract was independently audited in September 2026 and all nine findings are fixed. If a chain cannot be watched the checkout stops taking new payments on it, and money already on the contract can be released by you, from any wallet, without us.
+-   [§3](#preview) — Under these standard terms nothing is owed to you when a published objective is missed; an enterprise agreement can carry a service level. The escrow contract was independently audited in September 2026 and all nine findings are fixed. If a chain cannot be watched the checkout stops taking new payments on it, and money already on the contract can be released by you, from any wallet, without us.
 -   [§21](#not-screened) — We do not screen payers, wallet addresses, or where money came from — against sanctions lists or anything else. Those obligations remain yours.
 -   [§31](#acceptable-use) — You promise not to use paygate for fraud, for unlawful goods, or to launder money. If you do, we can suspend your account and refuse to verify your identity documents again.
 -   [§25](#liability) — Our liability to you is capped at the fees you paid us in the three months before the claim.
@@ -92,7 +92,7 @@ You accept these terms when you create an account or use the service, whichever 
 **This is a new payment processor, and these are the things it does not do yet.** Specifically, and without qualification:
 
 -   The escrow contract described in §7 was independently audited in September 2026. The audit found nine issues, three of them high severity, and all nine are fixed in the contract this service runs against. The audited source is identified by content hash in our repository, so the version reviewed is not a matter of trust. It is the contract every subscription settles through.
--   There is no uptime commitment, so what decides your exposure is what the system does when something breaks — and that is built rather than promised. New payments **fail closed**: when a chain cannot be watched, the checkout page refuses to show an address for it rather than inviting a transfer nothing would see. Money already on the contract stays **recoverable without us**: `collect` and `releaseHold` are permissionless and not pausable, so a payment this gateway cannot settle is one you can settle yourself, from any wallet, without our key and without our permission.
+-   These standard terms carry no uptime commitment — an enterprise agreement is negotiated separately and can carry one (§23). Under these terms, what decides your exposure is what the system does when something breaks, and that is built rather than promised. New payments **fail closed**: when a chain cannot be watched, the checkout page refuses to show an address for it rather than inviting a transfer nothing would see. Money already on the contract stays **recoverable without us**: `collect` and `releaseHold` are permissionless and not pausable, so a payment this gateway cannot settle is one you can settle yourself, from any wallet, without our key and without our permission.
 -   Backups are taken and each one is verified by restoring it and checking the ledger still balances. That is a procedure, not an undertaking about how much data a failure could cost you.
 
 The status page publishes what the service is measured against and what it is currently doing. Those are objectives, not undertakings.
@@ -250,7 +250,9 @@ A privacy policy (§30) will describe retention for personal data specifically. 
 
 ## 23. Availability, suspension and termination\[technical account\]
 
-**We commit to no level of availability.** See §3. Our own dependencies — blockchain RPC providers above all — degrade, and when they degrade we degrade with them.
+**These terms commit to no level of availability.** See §3. Our own dependencies — blockchain RPC providers above all — degrade, and when they degrade we degrade with them.
+
+That is a property of _these_ terms, which are the standard ones. An enterprise agreement is negotiated separately and can carry a service level, along with settlement and support arrangements this document does not offer. Ask at support@paygatehq.com.
 
 We may suspend or terminate an account for breach of these terms or where required by law. We will notify the contact address on the account, other than where the law prevents us. You may stop using the service at any time.
 

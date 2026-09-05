@@ -37,6 +37,7 @@ For high monthly volume, or for terms, settlement and support arrangements the s
 -    Negotiated rate below the standard percentage
 -    Custom settlement and hold arrangements
 -    Named contact and priority support
+-    Service level agreement on request
 -    Onboarding help for your integration
 -    Invoicing and contract terms
 
