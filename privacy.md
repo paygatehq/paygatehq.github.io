@@ -10,7 +10,7 @@ Legal
 
 Effective 2026-09-06 · What we collect, who else sees it, and what we cannot delete.
 
-Version 2026-09-06.2
+Version 2026-09-06.3
 
 ## Contents
 

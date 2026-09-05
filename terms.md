@@ -10,7 +10,7 @@ Legal
 
 Effective 2026-09-06 · These terms govern use of the paygate payment gateway by a merchant.
 
-Version 2026-09-06.2
+Version 2026-09-06.3
 
 Legal review
 
@@ -121,7 +121,14 @@ You register that payout address yourself and it is the only destination the con
 
 Under **escrow settlement** — the strategy named `escrow_contract` — the payer sends to a deposit address generated for that payment. The funds are then swept into the escrow contract, where they rest for the configured hold period before being released to the payout address you registered, net of any fee under §13.
 
-**During that hold, the funds are in a contract we operate the release key for.** We can release them to you and, under the conditions in §9, return them to the payer. That is custody, and we describe it as custody rather than as a technical detail.
+**While the funds rest there, this is what we can and cannot do.**
+
+-   **We cannot send them anywhere but your address.** `releaseHold` pays the payout address recorded on your account and takes no destination argument.
+-   **We cannot stop them reaching you.** `releaseHold` is permissionless and not pausable: once the hold matures, you — or anyone — can push it from any wallet, without our key and without our permission.
+-   **We cannot return them to your payer.** Only the controller key on your account can refund a hold. That key is yours.
+-   **We can change the payout address on your account, and we can deactivate the account, which delays a release.** The first exists so a merchant who loses their controller key can still be paid; the second is an offboarding and fraud control. Both require the contract owner key. Neither is reachable with the key this gateway runs with day to day, so an attacker holding the operator key can do neither.
+
+We describe that last power as custody, because it is one: an address we can change is an address you have not solely controlled. We do not describe the service as non-custodial, and you should not either.
 
 Two consequences worth stating plainly. First, until the sweep completes, a payment reading `paid` is true of your customer and not yet of you — the money has left them and has not reached you. Second, **this is the only path.** One-time payments and subscriptions both settle through this contract; the recurring mechanism in §12 requires it, and there is no non-custodial route for either.
 
@@ -139,7 +146,7 @@ While funds are held under §7, our operators can release them to you. That powe
 
 **We cannot return held funds to the payer.** The escrow admits only your own controller key for a return. The branch that let our keys do it is disabled deliberately, so that no key we hold can move a payer’s money. If returning a payment is the right outcome, the console gives you the transaction and your own wallet signs it.
 
-This is a limit on us rather than on you, and it is the point: there is no operator of ours, and no combination of operators, who can move money out of a hold. It also means the decision is yours to make and yours to be accountable for. See §8.
+This is a limit on us rather than on you, and it is the point: there is no operator of ours, and no combination of operators, who can move money out of a hold. The contract owner key is a separate thing and it is not unlimited either — §7 lists exactly what it can do. It also means the decision is yours to make and yours to be accountable for. See §8.
 
 Every operator action of this kind writes a permanent audit record. Those records cannot be edited or deleted — see §22.
 
